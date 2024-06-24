@@ -33,16 +33,6 @@ logger = getLogger(__name__)
 _serial_no_lock = _thread.allocate_lock()
 
 
-def option_lock(thread_lock):
-    """Function thread lock decorator"""
-    def function_lock(func):
-        def wrapperd_fun(*args, **kwargs):
-            with thread_lock:
-                return func(*args, **kwargs)
-        return wrapperd_fun
-    return function_lock
-
-
 def str_fill(source, rl="l", target_len=0, fill_field="0"):
     if len(source) >= target_len or target_len <= 0:
         return source
@@ -71,7 +61,6 @@ class SerialNo:
     def __init_iter_serial_no(self):
         self.__iter_serial_no = iter(range(self.__start_no, self.__num))
 
-    @option_lock(_serial_no_lock)
     def get_serial_no(self):
         """Get message serial number.
 
@@ -79,7 +68,8 @@ class SerialNo:
             int: serial number
         """
         try:
-            return next(self.__iter_serial_no)
+            with _serial_no_lock:
+                return next(self.__iter_serial_no)
         except StopIteration:
             self.__init_iter_serial_no()
             return self.get_serial_no()
