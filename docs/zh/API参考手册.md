@@ -57,7 +57,7 @@ gt06_obj = GT06(ip=ip, port=port, domain=domain, timeout=timeout)
 |:---|:---|:---|
 |protocol_no|int|协议号，默认为`0x80`|
 |msg_no|int|服务端消息流水号|
-|content|dict|服务端下发指令信息<br>`server_flag`(int) - 服务器标志位<br>`cmd_data`(str) - 指令内容|
+|content|dict|服务端下发指令信息<br>`server_flag`（int） - 服务器标志位<br>`cmd_data`（str） - 指令内容|
 
 **返回值：**
 
@@ -164,7 +164,7 @@ gt06_obj.disconnect()
 
 |参数|类型|说明|
 |:---|:---|:---|
-|imei|str|设备 IMEI|
+|imei|str|IMEI|
 
 **返回值：**
 
@@ -204,7 +204,7 @@ gt06_obj.login(imei)
 |mnc|int|移动网号码（Mobile Network Code）|
 |lac|int|位置区码（Location Area Code）|
 |cell_id|int|移动基站（Cell Tower ID）取值范围: 0x000000 ~ 0xFFFFFF|
-|include_device_status|bool|是否同步上传设备状态，`True` - 是，`False` - 否，默认：`False`|
+|include_device_status|bool|是否同步上传设备状态<br>`True` - 是<br>`False` - 否<br>默认：`False`|
 
 **返回值：**
 
